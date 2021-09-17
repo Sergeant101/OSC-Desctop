@@ -109,7 +109,7 @@ namespace OSC_New_Conсept
             this.chart1.BackSecondaryColor = System.Drawing.Color.Navy;
             this.chart1.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             this.chart1.BorderlineWidth = 5;
-            chartArea1.BackColor = System.Drawing.Color.LightGreen;
+            chartArea1.BackColor = System.Drawing.SystemColors.Highlight;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Cursor = System.Windows.Forms.Cursors.Cross;
@@ -144,9 +144,13 @@ namespace OSC_New_Conсept
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series3.Legend = "Legend1";
             series3.Name = "Sh_2";
+            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.LabelBorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series4.LabelBorderWidth = 2;
             series4.Legend = "Legend1";
-            series4.Name = "Series4";
+            series4.Name = "Sh_3";
             series5.ChartArea = "ChartArea1";
             series5.Legend = "Legend1";
             series5.Name = "Series5";

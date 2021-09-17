@@ -16,10 +16,11 @@ namespace OSC_New_Conсept
         ReadWriteDataPLC OSC_From_PLC = new ReadWriteDataPLC();
         FormAnaliticsOSC WindowsAnalitics = null;
 
-        // Данные для отображения канала 0
+        // Данные для отображения каналов
         double[] AxisY_Sh0 = new double[200];
         double[] AxisY_Sh1 = new double[200];
         double[] AxisY_Sh2 = new double[200];
+        double[] AxisY_Sh3 = new double[200];
 
         // предыдущее значение готового для чтения массива данных
         int ReadyArrayPrev;
@@ -102,6 +103,7 @@ namespace OSC_New_Conсept
                 short[] OSC_Arr_Sh0 = OSC_From_PLC.Read_OSC_Array(505, 56 + 100 * (ReadyArrayCurr - 1));
                 short[] OSC_Arr_Sh1 = OSC_From_PLC.Read_OSC_Array(505, 456 + 100 * (ReadyArrayCurr - 1));
                 short[] OSC_Arr_Sh2 = OSC_From_PLC.Read_OSC_Array(505, 856 + 100 * (ReadyArrayCurr - 1));
+                short[] OSC_Arr_Sh3 = OSC_From_PLC.Read_OSC_Array(505, 1256 + 100 * (ReadyArrayCurr - 1));
 
                 //сдвигаем исходный массив влево для добавления считанного куска данных
                 //для нормального движения графика при приращении данных
@@ -114,6 +116,7 @@ namespace OSC_New_Conсept
                     Shift_Arr(AxisY_Sh0, OSC_Arr_Sh0, i);
                     Shift_Arr(AxisY_Sh1, OSC_Arr_Sh1, i);
                     Shift_Arr(AxisY_Sh2, OSC_Arr_Sh2, i);
+                    Shift_Arr(AxisY_Sh3, OSC_Arr_Sh3, i);
                    
                 }
 
@@ -123,6 +126,7 @@ namespace OSC_New_Conсept
                 chart1.Series[0].Points.DataBindXY(AxisX, AxisY_Sh0);
                 chart1.Series[1].Points.DataBindXY(AxisX, AxisY_Sh1);
                 chart1.Series[2].Points.DataBindXY(AxisX, AxisY_Sh2);
+                chart1.Series[3].Points.DataBindXY(AxisX, AxisY_Sh3);
 
                 // =========================================================================================
                 // Пишем данные в файл
@@ -137,7 +141,8 @@ namespace OSC_New_Conсept
                 }
                 catch
                 {
-                    // Если при чтении возникло исключение создаём новый файл с пустой строкой                    
+                    // Если при чтении возникло исключение создаём новый файл с пустой строкой       
+                    // Если открыть при записи тоже исключение
                     try
                     {
                         using (StreamWriter sw = new StreamWriter(Path, false))
@@ -162,7 +167,7 @@ namespace OSC_New_Conсept
                     for (int i = 0; i < 50; i++)
                     {
                         string LineOSC = "";
-                        LineOSC = OSC_Arr_Sh0[i] + ";" + OSC_Arr_Sh1[i] + ";" + OSC_Arr_Sh2[i] + ";" + "0" + ";" + "0" + ";" + "0" 
+                        LineOSC = OSC_Arr_Sh0[i] + ";" + OSC_Arr_Sh1[i] + ";" + OSC_Arr_Sh2[i] + ";" + OSC_Arr_Sh3[i] + ";" + "0" + ";" + "0" 
                             + ";" + "0" + ";" + "0" + ";" + "0" + ";" + "0" + ";" + "0" + ";" + "0" + ";"
                             + "0" + ";" + "0" + ";" + "0" + ";" + "0" + ";" + "0" + ";" + "0" + ";" + "0"
                             + ";" + "0" + ";";

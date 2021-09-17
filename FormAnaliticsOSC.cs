@@ -34,6 +34,7 @@ namespace OSC_New_Conсept
         {
             InitializeComponent();
             timer.Tick += new EventHandler(RefreshLabel);
+            this.OSC.MouseMove += new System.Windows.Forms.MouseEventHandler(CursorPos);
             timer.Interval = 100;
             timer.Start();
 
@@ -88,10 +89,12 @@ namespace OSC_New_Conсept
         // Отслеживаем курсор мыши в поле графиков
         private void RefreshLabel(object sender, EventArgs e)
         {
-           // если фокус на графике отслеживаем координаты мыши
-           if (MutexTrakingMouse)
+            // если фокус на графике отслеживаем координаты мыши
+            if (MutexTrakingMouse)
             {
-                //MouseTrakingXY = Mouse.GetPosition(OSC);
+                //MouseTrakingXY = CursorPos();
+                textBox2.Text = "x = " + Convert.ToString(MouseTrakingXY.X);
+                textBox3.Text = "y = " + Convert.ToString(MouseTrakingXY.Y);
             }
         }
 
@@ -129,8 +132,8 @@ namespace OSC_New_Conсept
             OSC.Series[0].Points.DataBindXY(x, ch_0);
         }
 
-// =========================================================================================================
-// Парсим считанную строку на двадцать элементов
+        // =========================================================================================================
+        // Парсим считанную строку на двадцать элементов
         private void Parse_20_Elem(string _Source, double[] _arr)
         {
             int _i = 0;
@@ -195,17 +198,6 @@ namespace OSC_New_Conсept
                 ch_1[i] = OSC_Arhive[i][1];
                 ch_2[i] = OSC_Arhive[i][2];
 
-                /*
-                int j = i * 5;
-                if (j < count/5)
-                {
-                    ch_0[j] = OSC_Arhive[j][0];
-                    ch_0[j + 1] = OSC_Arhive[j + 1][0];
-                    ch_0[j + 2] = OSC_Arhive[j + 2][0];
-                    ch_0[j + 3] = OSC_Arhive[j + 3][0];
-                    ch_0[j + 4] = OSC_Arhive[j + 4][0];
-                }
-             */
             }
 
             // настройка осей графика
@@ -221,16 +213,18 @@ namespace OSC_New_Conсept
 
         private void OSC_Click(object sender, EventArgs e)
         {
-            
+
         }
 
+        // Фокус пойман на графиках
         private void TrackingMouseFocus(object sender, System.EventArgs e)
         {
             textBox1.Text = "Фокус";
 
             MutexTrakingMouse = true;
         }
-        
+
+        // Фокус ушел с графиков
         private void TrakingMouseLeave(object sender, System.EventArgs e)
         {
             textBox1.Text = "Потерян";
@@ -238,7 +232,23 @@ namespace OSC_New_Conсept
             MutexTrakingMouse = false;
         }
 
+        //Координаты курсора
+        private void CursorPos(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            MouseTrakingXY = e.Location;
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
         }
