@@ -18,14 +18,12 @@ namespace OSC_New_Conсept
         // Все считанные из файла данные
         private List<List<double>> OSC_Arhive = new List<List<double>>();
 
-        // Массив для распарсенной текстовой строки 
-        private double[] OSC_Arr_Slise = new double[20];
 
         public Prepare_Data()
         {
             PathData = @"C:\OSC.csv";
 
-
+            Prepare(PathData, OSC_Arhive);
 
         }
 
@@ -33,11 +31,15 @@ namespace OSC_New_Conсept
         public Prepare_Data(string _Path)
         {
             PathData = _Path;
+
+            Prepare(PathData, OSC_Arhive);
+
         }
 
-// =========================================================================================================
+
+ // =========================================================================================================
 // Считываем данные из файла и формируем динамический список из данных
-        static void Prepare(string _Path, List<List<double>> _OSC_Arhive)
+        private void Prepare(string _Path, List<List<double>> _OSC_Arhive)
         {
             // Параметры:   _Path - путь до папки с данными
             //              _OSC_Arhive - все считанные данные
@@ -49,6 +51,7 @@ namespace OSC_New_Conсept
                 {
                     string line;
                     int i = 0;
+                    double[] OSC_Arr_Slise = new double[20];
 
                     // убираем первую строку заголовка
                     sr.ReadLine();
@@ -56,11 +59,12 @@ namespace OSC_New_Conсept
                     while ((line = sr.ReadLine()) != null)
                     {
                         _OSC_Arhive.Add(new List<double>());
-                        this.Parse_20_Elem(line, OSC_Arr_Slise);
+                        this.Parse_20_Elem(line,
+                                           OSC_Arr_Slise);
 
                         foreach (double elem in OSC_Arr_Slise)
                         {
-                            OSC_Arhive[i].Add(elem);
+                            _OSC_Arhive[i].Add(elem);
                         }
 
                         i++;
@@ -72,10 +76,18 @@ namespace OSC_New_Conсept
 
             }
         }
-    }
+
+
+        public List<List<double>> ReturnArhive
+        {
+            get
+            {
+                return OSC_Arhive;
+            }
+        }
 
         // =========================================================================================================
-        // Парсим считанную строку на двадцать элементов !!!
+        // Парсим считанную строку на двадцать элементов 
         private void Parse_20_Elem(string _Source, double[] _arr)
         {
             int _i = 0;
@@ -112,5 +124,6 @@ namespace OSC_New_Conсept
         }
 
 
-    }
+
+    }        
 }

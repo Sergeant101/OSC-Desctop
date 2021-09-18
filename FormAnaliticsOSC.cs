@@ -15,9 +15,7 @@ namespace OSC_New_Conсept
 {
     public partial class FormAnaliticsOSC : Form
     {
-        // Путь к файлу с данными !!!
-        string Path = @"C:\OSC.csv";
-
+ 
         // Массив для распарсенной текстовой строки
         private double[] OSC_Arr_Slise = new double[20];
 
@@ -30,58 +28,24 @@ namespace OSC_New_Conсept
         // координаты мыши
         Point MouseTrakingXY = new Point();
 
+        // типа объект возращающий данные из архива
+        Prepare_Data PrepareToArhive = new Prepare_Data();
+
         public FormAnaliticsOSC()
         {
             InitializeComponent();
-            timer.Tick += new EventHandler(RefreshLabel);
-            this.OSC.MouseMove += new System.Windows.Forms.MouseEventHandler(CursorPos);
+            timer.Tick += new EventHandler(RefreshLabel);            
             timer.Interval = 100;
             timer.Start();
 
+            this.OSC.MouseMove += new System.Windows.Forms.MouseEventHandler(CursorPos);
             this.OSC.MouseEnter += new System.EventHandler(this.TrackingMouseFocus);
             this.OSC.MouseLeave += new System.EventHandler(this.TrakingMouseLeave);
 
-            // =========================================================================================================
-            // Считываем данные из файла и формируем динамический список из данных !!!
-
-            // !!! всё равно выбивает, если файл открыть другим приложением, даже в обёртке !!!
-            try
-            {
-                using (StreamReader sr = new StreamReader(Path))
-                {
-                    string line;
-                    int i = 0;
-
-                    // убираем первую строку заголовка
-                    sr.ReadLine();
-
-                    // тестируем
-
-                    //foreach ( double elem in OSC_Arr_Slise)
-                    //{
-                    //richTextBox1.Text += Convert.ToString(elem) + "\r\n";
-                    //}
-                    // конец теста
-
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        OSC_Arhive.Add(new List<double>());
-                        Parse_20_Elem(line, OSC_Arr_Slise);
-
-                        foreach (double elem in OSC_Arr_Slise)
-                        {
-                            OSC_Arhive[i].Add(elem);
-                        }
-
-                        i++;
-                    }
-                }
-            }
-            finally
-            {
-
-            }
+            OSC_Arhive = PrepareToArhive.ReturnArhive;
+            
         }
+
 
         readonly Timer timer = new Timer();
 
@@ -97,9 +61,6 @@ namespace OSC_New_Conсept
                 textBox3.Text = "y = " + Convert.ToString(MouseTrakingXY.Y);
             }
         }
-
-        // =========================================================================================================
-        // Обработка графиков из архива осциллографа
 
         private void View_Arhive_OSC()
         {
@@ -130,43 +91,6 @@ namespace OSC_New_Conсept
             OSC.ChartAreas[0].AxisX.MajorGrid.Interval = Step;
             // Добавляем вычиленные значения в графики
             OSC.Series[0].Points.DataBindXY(x, ch_0);
-        }
-
-        // =========================================================================================================
-        // Парсим считанную строку на двадцать элементов !!!
-        private void Parse_20_Elem(string _Source, double[] _arr)
-        {
-            int _i = 0;
-
-            // Это очень смешной костылик: при чтении из файла крайний в строке делимитер не читается
-            // посему последнее число в строке не парсится, поэтому добавляем "свой" конечный делимитер
-            // если он отсутствует
-            if (_Source.LastIndexOf(";") != (_Source.Length - 1))
-            {
-                _Source += ";";
-            }
-
-            do
-            {
-
-                int AddrDelimiter = _Source.IndexOf(";");
-
-                // если делимитеры кончились или элементов больше двадцати - стоп!
-                if (AddrDelimiter == -1 || _i >= 20)
-                {
-                    break;
-                }
-
-                // забираем число
-                _arr[_i] = Convert.ToDouble(_Source.Substring(0, AddrDelimiter));
-
-                // обрезаем по делимитер
-                _Source = _Source.Remove(0, AddrDelimiter + 1);
-
-                _i++;
-
-            } while (true);
-
         }
 
 

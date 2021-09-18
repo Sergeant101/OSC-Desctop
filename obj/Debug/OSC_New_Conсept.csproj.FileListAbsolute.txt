@@ -26,3 +26,17 @@ C:\Users\Admin\source\repos\OSC_New_Concept\obj\Debug\OSC_New_Conсept.csproj.Co
 C:\Users\Admin\source\repos\OSC_New_Concept\obj\Debug\OSC_New_Conсept.csproj.CopyComplete
 C:\Users\Admin\source\repos\OSC_New_Concept\obj\Debug\OSC_New_Conсept.exe
 C:\Users\Admin\source\repos\OSC_New_Concept\obj\Debug\OSC_New_Conсept.pdb
+C:\_MAIN_\MyFile\Project\OSC-Desctop\bin\Debug\OSC_New_Conсept.exe.config
+C:\_MAIN_\MyFile\Project\OSC-Desctop\bin\Debug\OSC_New_Conсept.exe
+C:\_MAIN_\MyFile\Project\OSC-Desctop\bin\Debug\OSC_New_Conсept.pdb
+C:\_MAIN_\MyFile\Project\OSC-Desctop\bin\Debug\S7.Net.dll
+C:\_MAIN_\MyFile\Project\OSC-Desctop\bin\Debug\S7.Net.xml
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.csprojAssemblyReference.cache
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.Form1.resources
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.FormAnaliticsOSC.resources
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.Properties.Resources.resources
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.csproj.GenerateResource.cache
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.csproj.CoreCompileInputs.cache
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.csproj.CopyComplete
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.exe
+C:\_MAIN_\MyFile\Project\OSC-Desctop\obj\Debug\OSC_New_Conсept.pdb
