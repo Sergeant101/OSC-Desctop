@@ -25,11 +25,15 @@ namespace OSC_New_Conсept
         // отслеживаем фокус мыши на графике осциллограмм
         private bool MutexTrakingMouse = false;
 
-        // координаты мыши
+        // координаты мыши !!!
         Point MouseTrakingXY = new Point();
 
         // типа объект возращающий данные из архива
         Prepare_Data PrepareToArhive = new Prepare_Data();
+
+        // работа с мышью
+        Mouse GetDataMouse = null;
+
 
         public FormAnaliticsOSC()
         {
@@ -38,9 +42,11 @@ namespace OSC_New_Conсept
             timer.Interval = 100;
             timer.Start();
 
-            this.OSC.MouseMove += new System.Windows.Forms.MouseEventHandler(CursorPos);
+            //this.OSC.MouseMove += new System.Windows.Forms.MouseEventHandler(CursorPos);
             this.OSC.MouseEnter += new System.EventHandler(this.TrackingMouseFocus);
             this.OSC.MouseLeave += new System.EventHandler(this.TrakingMouseLeave);
+                        
+            GetDataMouse = new Mouse(this);
 
             OSC_Arhive = PrepareToArhive.ReturnArhive;
             
@@ -155,13 +161,13 @@ namespace OSC_New_Conсept
 
             MutexTrakingMouse = false;
         }
-
+/*
         //Координаты курсора
         private void CursorPos(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             MouseTrakingXY = e.Location;
         }
-
+*/
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
