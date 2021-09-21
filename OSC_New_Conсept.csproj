@@ -56,7 +56,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mouse.cs" />
+    <Compile Include="MouseState.cs" />
     <Compile Include="DataOSC.cs" />
     <Compile Include="FormAnaliticsOSC.cs">
       <SubType>Form</SubType>

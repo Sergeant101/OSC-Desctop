@@ -1,71 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Windows.Documents;
-using System.Windows.Input;
 
 namespace OSC_New_Conсept
 {
     public partial class FormAnaliticsOSC : Form
     {
- 
-        // Массив для распарсенной текстовой строки
-        private double[] OSC_Arr_Slise = new double[20];
 
-        // Все считанные из файла данные !!!
+
+        // все считанные из файла данные 
         private List<List<double>> OSC_Arhive = new List<List<double>>();
 
-        // отслеживаем фокус мыши на графике осциллограмм
-        private bool MutexTrakingMouse = false;
-
-        // координаты мыши !!!
-        Point MouseTrakingXY = new Point();
-
-        // типа объект возращающий данные из архива
-        Prepare_Data PrepareToArhive = new Prepare_Data();
+        // объект возращающий данные из архива
+        Prepare_Data PrepareFromArhive = new Prepare_Data();
 
         // работа с мышью
-        Mouse GetDataMouse = null;
+        MouseState GetDataMouse = null;
 
+        readonly Timer timer = new Timer();
 
         public FormAnaliticsOSC()
         {
             InitializeComponent();
             timer.Tick += new EventHandler(RefreshLabel);            
-            timer.Interval = 100;
+            timer.Interval = 42;
             timer.Start();
-
-            //this.OSC.MouseMove += new System.Windows.Forms.MouseEventHandler(CursorPos);
-            this.OSC.MouseEnter += new System.EventHandler(this.TrackingMouseFocus);
-            this.OSC.MouseLeave += new System.EventHandler(this.TrakingMouseLeave);
                         
-            GetDataMouse = new Mouse(this);
+            GetDataMouse = new MouseState(this);
 
-            OSC_Arhive = PrepareToArhive.ReturnArhive;
-            
+            OSC_Arhive = PrepareFromArhive.ReturnArhive;            
         }
 
-
-        readonly Timer timer = new Timer();
-
+        
         // =========================================================================================================
         // Отслеживаем курсор мыши в поле графиков
         private void RefreshLabel(object sender, EventArgs e)
         {
-            // если фокус на графике отслеживаем координаты мыши
-            if (MutexTrakingMouse)
-            {
-                //MouseTrakingXY = CursorPos();
-                textBox2.Text = "x = " + Convert.ToString(MouseTrakingXY.X);
-                textBox3.Text = "y = " + Convert.ToString(MouseTrakingXY.Y);
-            }
+
+            textBox2.Text = "x = " + Convert.ToString(GetDataMouse.GetMouseX);
+            textBox3.Text = "y = " + Convert.ToString(GetDataMouse.GetMouseY);
+
+            textBox1.Text = Convert.ToString(GetDataMouse.RangeX);
+
         }
 
         private void View_Arhive_OSC()
@@ -146,28 +122,6 @@ namespace OSC_New_Conсept
 
         }
 
-        // Фокус пойман на графиках
-        private void TrackingMouseFocus(object sender, System.EventArgs e)
-        {
-            textBox1.Text = "Фокус";
-
-            MutexTrakingMouse = true;
-        }
-
-        // Фокус ушел с графиков
-        private void TrakingMouseLeave(object sender, System.EventArgs e)
-        {
-            textBox1.Text = "Потерян";
-
-            MutexTrakingMouse = false;
-        }
-/*
-        //Координаты курсора
-        private void CursorPos(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            MouseTrakingXY = e.Location;
-        }
-*/
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
