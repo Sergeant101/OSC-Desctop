@@ -60,10 +60,10 @@ namespace OSC_New_Conсept
         private void View_Arhive_OSC(int _BeginX, int _Range)
         {
             // начальная точка графика
-            double Xmin = _BeginX * ((OSC.ChartAreas[0].AxisX.Maximum - OSC.ChartAreas[0].AxisX.Minimum) / 1000);
+            double Xmin = Math.Round(_BeginX * ((OSC.ChartAreas[0].AxisX.Maximum - OSC.ChartAreas[0].AxisX.Minimum) / 1000) + OSC.ChartAreas[0].AxisX.Minimum);
             // конечная точка графика: OSC_Arhive.Count - 1 - конечная точка Х считанного из файла архива
-            // проверяем чтобы при масштабировании графика правая граница не вылезла за пределы графиков 
-            double Xmax = Xmin + _Range*((OSC.ChartAreas[0].AxisX.Maximum - OSC.ChartAreas[0].AxisX.Minimum) / 1000);
+            // проверяем чтобы при масштабировании графика правая граница не вылезла за крайний предел графиков 
+            double Xmax = Xmin + Math.Round(_Range*((OSC.ChartAreas[0].AxisX.Maximum - OSC.ChartAreas[0].AxisX.Minimum) / 1000));
             if (Xmax > OSC_Arhive.Count - 1)
             {
                 Xmax = OSC_Arhive.Count - 1;
