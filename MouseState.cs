@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace OSC_New_Conсept
 {
@@ -84,8 +78,8 @@ namespace OSC_New_Conсept
         {
             get
             {
-                // 35 - поправка на смещение окна отображения графиков от окна chart
-                return RangeX1 - 35;
+                // 56 - поправка на смещение по oX окна отображения графиков от окна chart
+                return RangeX1 - 56;
             }
         }
 

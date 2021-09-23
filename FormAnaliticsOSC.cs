@@ -7,7 +7,6 @@ namespace OSC_New_Conсept
     public partial class FormAnaliticsOSC : Form
     {
 
-
         // все считанные из файла данные 
         private List<List<double>> OSC_Arhive = new List<List<double>>();
 
@@ -18,6 +17,10 @@ namespace OSC_New_Conсept
         MouseState GetDataMouse = null;
 
         readonly Timer timer = new Timer();
+
+        // текущее/предыдущее значение для масштрабирования графика функции
+        int CurRange, PrevRange;
+
 
         public FormAnaliticsOSC()
         {
@@ -33,25 +36,42 @@ namespace OSC_New_Conсept
 
         
         // =========================================================================================================
-        // Отслеживаем курсор мыши в поле графиков
+        // Рабочая область
         private void RefreshLabel(object sender, EventArgs e)
         {
 
             textBox2.Text = "x = " + Convert.ToString(GetDataMouse.GetMouseX);
             textBox3.Text = "y = " + Convert.ToString(GetDataMouse.GetMouseY);
 
-            textBox1.Text = Convert.ToString(GetDataMouse.RangeX);
+            // Отслеживаем чё там за команду подали мышью через выделение области на графиках
+            CurRange = GetDataMouse.RangeX;
+            if (CurRange != PrevRange)
+            {
+                if (CurRange > 0)
+                {
+                    View_Arhive_OSC(GetDataMouse.BeginRangeX, GetDataMouse.RangeX);
+                }
+                
+                PrevRange = CurRange;
+            }
 
         }
 
-        private void View_Arhive_OSC()
+        private void View_Arhive_OSC(int _BeginX, int _Range)
         {
             // начальная точка графика
-            double Xmin = 0;
-            // конечная точка графика
-            double Xmax = OSC_Arhive.Count - 1;
+            double Xmin = _BeginX * ((OSC.ChartAreas[0].AxisX.Maximum - OSC.ChartAreas[0].AxisX.Minimum) / 1000);
+            // конечная точка графика: OSC_Arhive.Count - 1 - конечная точка Х считанного из файла архива
+            // проверяем чтобы при масштабировании графика правая граница не вылезла за пределы графиков 
+            double Xmax = Xmin + _Range*((OSC.ChartAreas[0].AxisX.Maximum - OSC.ChartAreas[0].AxisX.Minimum) / 1000);
+            if (Xmax > OSC_Arhive.Count - 1)
+            {
+                Xmax = OSC_Arhive.Count - 1;
+            }
+
+            
             // шаг отриовки ...пока так, по факту посмотрим чё почём
-            double Step = 1;
+            double Step = 10;
             // количество точек графика
             int count = (int)Math.Ceiling((Xmax - Xmin) / Step) + 1;
             // массив значений оси Х
@@ -74,7 +94,6 @@ namespace OSC_New_Conсept
             // Добавляем вычиленные значения в графики
             OSC.Series[0].Points.DataBindXY(x, ch_0);
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
