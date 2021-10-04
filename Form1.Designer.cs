@@ -76,6 +76,7 @@ namespace OSC_New_Conсept
             this.button20 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Channel_0 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -449,12 +450,24 @@ namespace OSC_New_Conсept
             this.Channel_0.UseVisualStyleBackColor = true;
             this.Channel_0.Click += new System.EventHandler(this.Channel_0_Click);
             // 
+            // button21
+            // 
+            this.button21.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button21.Location = new System.Drawing.Point(7, 151);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(197, 24);
+            this.button21.TabIndex = 26;
+            this.button21.Text = "Анализ осциллограмм";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(1981, 953);
+            this.Controls.Add(this.button21);
             this.Controls.Add(this.Channel_0);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button12);
@@ -516,6 +529,7 @@ namespace OSC_New_Conсept
         private System.Windows.Forms.Button button20;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Channel_0;
+        private System.Windows.Forms.Button button21;
     }
 }
 

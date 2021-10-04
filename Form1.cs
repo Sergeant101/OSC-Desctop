@@ -15,6 +15,7 @@ namespace OSC_New_Conсept
     {
         ReadWriteDataPLC OSC_From_PLC = new ReadWriteDataPLC();
         FormAnaliticsOSC WindowsAnalitics = null;
+        Form2 WindowsAnaliticsOxyPlot = null;
 
         // Данные для отображения каналов
         double[] AxisY_Sh0 = new double[200];
@@ -257,6 +258,12 @@ namespace OSC_New_Conсept
         private void Channel_0_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            WindowsAnaliticsOxyPlot = new Form2();
+            WindowsAnaliticsOxyPlot.Show();
         }
     }
 }

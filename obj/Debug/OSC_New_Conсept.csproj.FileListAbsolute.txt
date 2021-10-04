@@ -54,3 +54,8 @@ C:\Users\Admin\source\repos\OSC-Desctop\obj\Debug\OSC_New_Conсept.csproj.CoreCo
 C:\Users\Admin\source\repos\OSC-Desctop\obj\Debug\OSC_New_Conсept.csproj.CopyComplete
 C:\Users\Admin\source\repos\OSC-Desctop\obj\Debug\OSC_New_Conсept.exe
 C:\Users\Admin\source\repos\OSC-Desctop\obj\Debug\OSC_New_Conсept.pdb
+C:\Users\Admin\source\repos\OSC-Desctop\bin\Debug\OxyPlot.dll
+C:\Users\Admin\source\repos\OSC-Desctop\bin\Debug\OxyPlot.WindowsForms.dll
+C:\Users\Admin\source\repos\OSC-Desctop\bin\Debug\OxyPlot.xml
+C:\Users\Admin\source\repos\OSC-Desctop\bin\Debug\OxyPlot.WindowsForms.xml
+C:\Users\Admin\source\repos\OSC-Desctop\obj\Debug\OSC_New_Conсept.Form2.resources
